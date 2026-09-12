@@ -2,7 +2,7 @@ BUILD_DIR = build
 CMAKE = cmake
 CTEST = ctest
 
-.PHONY: all debug release clean test-debug test-release debug-test release-test
+.PHONY: all debug release example clean test-debug test-release debug-test release-test
 
 all: debug
 
@@ -16,6 +16,9 @@ debug:
 release:
 	@$(CMAKE) -B $(BUILD_DIR) -S . -DCMAKE_BUILD_TYPE=Release
 	@$(CMAKE) --build $(BUILD_DIR)
+
+example: release
+	@$(BUILD_DIR)/example/example
 
 debug-test: debug
 	@cd $(BUILD_DIR) && $(CTEST) --output-on-failure
